@@ -23,8 +23,9 @@ const AddTodo = ({ todo, setTodo, handleAdd }: Props) => {
 }
 
 const Container = styled.div`
-width: 100%;
-margin: 0 auto;
+display: flex;
+justify-content: center;
+
 `
 
 export default AddTodo;

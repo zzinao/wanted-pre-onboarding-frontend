@@ -45,6 +45,7 @@ const InputFiled = styled.input`
   line-height: 25px;
   padding: 10px 10px;
   margin: 5px 0;
+  width: inherit;
   &:focus {
     outline: none;
   }
