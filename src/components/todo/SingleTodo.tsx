@@ -41,6 +41,7 @@ const SingleTodo = ({ todos, todo, setTodos }: Props) => {
         setTodos(todos.filter((todo) => todo.todo !== title));
         deleteTodo(id);
     };
+
     return (
         <Container>
             {edit ? (
@@ -89,7 +90,6 @@ const SingleTodo = ({ todos, todo, setTodos }: Props) => {
 
 const Container = styled.div`
   width: 400px;
-  height: 50px;
   margin: 10px auto;
   justify-contents: center;
   align-items: center;
