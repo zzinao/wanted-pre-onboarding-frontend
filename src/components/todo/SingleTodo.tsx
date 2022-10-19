@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { GetTodos } from "../../types/todoType";
-import { AiFillEdit, AiFillDelete } from "react-icons/ai";
+import { AiFillEdit, AiFillDelete, AiOutlineCheck } from "react-icons/ai";
 import { deleteTodo, updateTodo } from "../../apis/todo";
 import { Input, Button } from "../../elements";
 
@@ -20,8 +20,12 @@ const SingleTodo = ({ todos, todo, setTodos }: Props) => {
         setEditTodo({ ...editTodo, [id]: value });
     };
 
+    const handleComplete = (editTodo: GetTodos) => {
+        setTodos(todos.map((todo) => todo.id === editTodo.id ?
+            { ...todo, isCompleted: !todo.isCompleted } : todo))
+    }
+
     const handleUpdate = (editTodo: GetTodos) => {
-        console.log(editTodo);
         setTodos(
             todos.map((todo) =>
                 todo.id === editTodo.id
@@ -37,6 +41,7 @@ const SingleTodo = ({ todos, todo, setTodos }: Props) => {
         setTodos(todos.filter((todo) => todo.todo !== title));
         deleteTodo(id);
     };
+
     return (
         <Container>
             {edit ? (
@@ -55,8 +60,11 @@ const SingleTodo = ({ todos, todo, setTodos }: Props) => {
                 </EditForm>
             ) : (
                 <>
-                    <p>{todo.todo}</p>
+                    {!todo.isCompleted ? <p>{todo.todo}</p> : <del>{todo.todo}</del>}
                     <div>
+                        <span className="icon" onClick={() => handleComplete(editTodo)}>
+                            <AiOutlineCheck />
+                        </span>
                         <span
                             className="icon"
                             onClick={() => {
@@ -89,7 +97,7 @@ const Container = styled.div`
   padding: 10px 20px;
   border-radius: 10px;
   box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
-  & p {
+  & p, del {
     flex: 1;
     text-align: start;
   }

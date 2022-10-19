@@ -3,15 +3,17 @@ import TodoList from "../components/todo/TodoList";
 import Header from "../components/Header";
 import { createTodo, getTodos } from "../apis/todo";
 import { Todo } from "../types/todoType";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import AddTodo from "../components/todo/AddTodo";
 
 function TodoMain() {
     const [todo, setTodo] = useState<string>("");
     const [todos, setTodos] = useState<Todo[]>([]);
+    const navigate = useNavigate();
+    const token = localStorage.getItem("token");
 
     const handleAdd = (todo: string) => {
-        console.log(todo)
         if (todo) {
             createTodo(todo);
             setTodos([...todos, { id: Date.now(), todo, isCompleted: false, userId: 1, }]);
@@ -19,9 +21,11 @@ function TodoMain() {
         }
     }
     useEffect(() => {
+        if (!token) {
+            navigate("/")
+        }
         getTodos()
             .then((res) => {
-                console.log(res.data);
                 setTodos(res.data);
             })
             .catch((err) => console.log(err));

@@ -6,7 +6,6 @@ const Header = () => {
     const navigateTo = useNavigate();
 
     const token = localStorage.getItem("token");
-    console.log(token)
 
     const handleLogIn = () => {
         navigateTo("/");

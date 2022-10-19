@@ -17,7 +17,6 @@ export const loginDB = async (data: AuthForm, navigate: NavigateFunction) => {
             navigate("/todo")
         })
         .catch((err) => {
-            console.log(err);
             alert("아이디 혹은 비밀번호가 틀립니다")
         });
 };
@@ -34,6 +33,5 @@ export const signupDB = async (data: AuthForm) => {
         })
         .catch((err) => {
             alert("다시 시도해주세요")
-            console.log(err);
         });
 };
