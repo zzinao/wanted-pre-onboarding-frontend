@@ -5,6 +5,13 @@ import styled from "styled-components";
 const Header = () => {
     const navigateTo = useNavigate();
 
+    const token = localStorage.getItem("token");
+    console.log(token)
+
+    const handleLogIn = () => {
+        navigateTo("/");
+    };
+
     const handleLogOut = () => {
         localStorage.removeItem("token");
         navigateTo("/");
@@ -13,7 +20,11 @@ const Header = () => {
         <>
             <Container>
                 <h1>Todos</h1>
-                <p onClick={handleLogOut}>logout</p>
+                {!token ?
+                    <p onClick={handleLogIn}>login</p> :
+                    <p onClick={handleLogOut}>logout</p>
+                }
+
             </Container>
         </>
     );
