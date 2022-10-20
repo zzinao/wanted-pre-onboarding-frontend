@@ -22,6 +22,7 @@ function TodoMain() {
     }
     useEffect(() => {
         if (!token) {
+            alert("로그인을 해주세요!")
             navigate("/")
         }
         getTodos()
@@ -29,7 +30,7 @@ function TodoMain() {
                 setTodos(res.data);
             })
             .catch((err) => console.log(err));
-    }, []);
+    }, [setTodos]);
 
     return (
         <Container>
