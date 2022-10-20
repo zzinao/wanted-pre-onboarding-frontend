@@ -15,14 +15,18 @@ const SingleTodo = ({ todos, todo, setTodos }: Props) => {
     const [edit, setEdit] = useState<boolean>(false);
     const [editTodo, setEditTodo] = useState<GetTodos>(todo);
 
+    console.log(todo.isCompleted)
+
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const { id, value } = event.target;
         setEditTodo({ ...editTodo, [id]: value });
     };
 
     const handleComplete = (editTodo: GetTodos) => {
+        console.log(editTodo.isCompleted)
         setTodos(todos.map((todo) => todo.id === editTodo.id ?
             { ...todo, isCompleted: !todo.isCompleted } : todo))
+        updateTodo(editTodo.todo, editTodo.isCompleted, editTodo.id);
     }
 
     const handleUpdate = (editTodo: GetTodos) => {
@@ -62,7 +66,7 @@ const SingleTodo = ({ todos, todo, setTodos }: Props) => {
                 <>
                     {!todo.isCompleted ? <p>{todo.todo}</p> : <del>{todo.todo}</del>}
                     <div>
-                        <span className="icon" onClick={() => handleComplete(editTodo)}>
+                        <span className="icon" onClick={() => handleComplete(todo)}>
                             <AiOutlineCheck />
                         </span>
                         <span
